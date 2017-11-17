@@ -1,0 +1,6 @@
+动态代理模式：java.lang.reflect.Proxy生成$Proxy0...n为每个对象生成需要的代理对象
+0...n 是原子操作
+proxyClassNamePrefix="$Proxy"
+代理类实例是通过反射生成的 new instance
+代理对象 extends Proxy，实现被代理对象
+JDK实现动态代理需要实现类通过接口定义业务方法

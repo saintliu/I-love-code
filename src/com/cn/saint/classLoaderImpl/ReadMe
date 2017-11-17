@@ -1,0 +1,18 @@
+自定义加载器要继承java.lang.ClassLoader. 
+
+JVM有三种类加载器：bootstrap负责加载系统类，extclassloader负责加载扩展类，appclassloader负责加载应用类。他们主要是分工不一样，各自负责不同的区域，
+另外也是为了实现委托模型。什么是委托模型呢，其实就是当类加载器有加载需求的时候，先请示他的父类使用父类的搜索路径来加入，如果没有找到的话，才使用自己的搜索路径来来搜索类。
+当执行 java ***.class 的时候， java.exe 会帮助我们找到 JRE ，接着找到位于 JRE 内部的 jvm.dll ，这才是真正的 Java 虚拟机器 , 
+最后加载动态库，激活 Java 虚拟机器。虚拟机器激活以后，会先做一些初始化的动作，比如说读取系统参数等。一旦初始化动作完成之后，
+就会产生第一个类加载器―― Bootstrap Loader ， Bootstrap Loader 是由 C++ 所撰写而成，这个 Bootstrap Loader 所做的初始工作中，
+除了一些基本的初始化动作之外，最重要的就是加载 Launcher.java 之中的 ExtClassLoader ，并设定其 Parent 为 null ，代表其父加载器为 BootstrapLoader 。
+然后 Bootstrap Loader 再要求加载 Launcher.java 之中的 AppClassLoader ，并设定其 Parent 为之前产生的 ExtClassLoader 实体。
+这两个加载器都是以静态类的形式存在的。这里要请大家注意的是， Launcher$ExtClassLoader.class 与 Launcher$AppClassLoader.class 都是由 Bootstrap Loader 所加载，
+所以 Parent 和由哪个类加载器加载没有关系。 
+下面的图形可以表示三者之间的关系： 
+BootstrapLoader <---(Extends)----AppClassLoader <---(Extends)----ExtClassLoader 
+这三个加载器就构成我们的 Java 类加载体系。他们分别从以下的路径寻找程序所需要的类： 
+BootstrapLoader ： sun.boot.class.path 
+ExtClassLoader: java.ext.dirs 
+AppClassLoader: java.class.path 
+这三个系统参量可以通过 System.getProperty() 函数得到具体对应的路径。大家可以自己编程实现查看具体的路径。

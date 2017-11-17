@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <!-- 配置表和类的对应关系 
+    name: 实体类名称
+    table: 数据库表名
+  -->
+  <class name="com.cn.saint.ssh.hibernate.User" table="User">
+     <!--  主键 
+         name: 实体类主键名称
+         column: 表字段名称
+      -->
+     <id name="" column="">
+         <!-- 设置数据表id的增长策略-->
+          <generator class="native"></generator>
+     </id>
+     
+     <!-- 配置其他属性和字段的对应 -->
+     <property name="name" column="name"></property>
+     <property name="age" column="age"></property>
+  </class> 
+</hibernate-mapping>   
+   

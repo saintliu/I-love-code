@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+   "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+   "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+   
+<hibernate-configuration>
+   <!-- 配置数据库信息 -->
+   <session-factory>
+     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver></property>
+     <property name="hibernate.connection.url">jdbc:mysql:///HibernateDemo</property>
+     <property name="hibernate.connectionusername">admin</property>
+     <property name="hibernate.connectionpassword">admin</property>
+   <!-- 配置hibernate信息 -->
+     <property name="hibernate.show_sql">true</property>
+     <!-- 格式化sql -->
+     <property name="hibernate.format_sql">true</property>
+     <!-- hibernate会帮我们创建表，需要以下配置 
+          update: 已经有了表，会进行更新，如果没有表，会自动创建
+     -->
+     <property name="hibernate.hbm2ddl.auto">update</property>
+     <!-- 配置数据库方言 
+          在mysql里实现分页，使用关键字limit, 
+          在oracle里，使用rownum. 
+          让hibernate识别不同数据库识别的语句
+      -->
+     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+     
+   <!-- 配置映射xml文件 -->
+   <mapping resource="com/cn/saint/hibernate/User.hbm.xml"/>
+   </session-factory>
+</hibernate-configuration>
